@@ -8,19 +8,19 @@ const AddGame = () => {
     const [players, setPlayers] = useState("")
     const [categories, setCategories] = useState("");
     const navigate = useNavigate();
-    const buttonIsDisabled = !title || !description || !players || !categories;
+    const buttonIsDisabled = !title || !description || !players || !categories; //habilita que se agrege un juego si todos los campos estan completos
 
     const handleAddGame = async () => {
         const response = await fetch("http://localhost:3000/api/games/", {
-            method: "POST",
+            method: "POST",                                               //POST para añadir juego
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({title, description, players, categories}),
+            body: JSON.stringify({title, description, players, categories}), //se envian los datos ingresados como JSON
         });
 
         if(response.ok){
-            navigate("/");
+            navigate("/"); //si se agrega el juego correctamente se redirige a la pagina principal
         }
     };
 

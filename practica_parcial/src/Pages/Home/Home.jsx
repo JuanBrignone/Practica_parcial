@@ -5,27 +5,27 @@ import { useNavigate } from "react-router-dom";
 
 
 const getGames = async () => {
-    const gamesFetch = await fetch("http://localhost:3000/api/games")
-    const games = await gamesFetch.json();
+    const gamesFetch = await fetch("http://localhost:3000/api/games") //trae con un GET todos los juegos de la API
+    const games = await gamesFetch.json(); //los datos se convierten a JSON
     return games;
 };
 
 const Home = () => {
-    const [games, setGames] = useState([]);
+    const [games, setGames] = useState([]); //games es el estado que guarda los juegos obtenidos por la API
     const navigate = useNavigate();
 
     const refreshGames = async () => {
-        const updatedGames = await getGames();
+        const updatedGames = await getGames(); //llama a la funcion getGames para obtener la lista actualizada
         setGames(updatedGames);
     };
 
     useEffect(() => {
-        refreshGames();
+        refreshGames(); //se ejecuta al abrir la pagina, es para obtener la lista de juegos
     }, []);
 
     const handleAddGameClick = () => {
-        navigate("/addGame");
-    };
+        navigate("/addGame"); //la ruta del addGame se setea aca ya que en la pagina Home aparece el boton de añadir juego
+    };                        //por lo tanto, cada vez que se hace click en el boton, se navega hasta la ruta dicha en el navigate
 
     return (
         <div>
@@ -35,14 +35,14 @@ const Home = () => {
                     Add Game
                 </button>
             </div>
-            {games.length ? (
+            {games.length ? ( // si hay juegos en el estado games, se muestran en forma de tarjetas, utilizando Card
                 <div className="home-grid-cards">
-                    {games.map((game) => (
+                    {games.map((game) => ( 
                         <Card
                             key={game.id}
                             title={game.title}
                             id={game.id}
-                            refreshGames={refreshGames}
+                            refreshGames={refreshGames} //se pasa como prop para que luego de eliminar se actualice automaticamente
                         />
                     ))}
                 </div>

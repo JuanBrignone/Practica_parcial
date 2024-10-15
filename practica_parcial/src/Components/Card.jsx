@@ -4,22 +4,22 @@ import {useNavigate} from "react-router-dom";
 
 const deleteGame = async (id) => {
     const gameDelete = await fetch("http://localhost:3000/api/games/" + id, {
-        method: "DELETE",
-    });
+        method: "DELETE", 
+    }); //esta funcion hace una peticion HTTP a la API con el metodo DELETE para eliminar el game a traves de su id
 
     return gameDelete;
 }
 
 const Card = ({title, id, refreshGames}) => {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); //esta funcion permite redirigir al ususario a otra pagina  
 
     const handleDetailsClick = () => {
-        navigate(`/details/${id}`);
+        navigate(`/details/${id}`); //cuando se toca el boton Details, se redirige al usuario a la pagina de detalles con esta URL
     };
 
     const handleDeleteClick = async () => {
-        const response = await deleteGame(id);
-        if(response.ok){
+        const response = await deleteGame(id); //se llama a la funcion deleteGame definida mas arriba cuando se da click al boton Delete
+        if(response.ok){                       // y elimina el juego a traves del id 
             refreshGames();
         }
     };

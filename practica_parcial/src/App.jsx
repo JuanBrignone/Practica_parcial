@@ -10,8 +10,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/details/:id" element={<Details />} />
-          <Route path="/addGame" element={<AddGame />} />
+          <Route path="/details/:id" element={<Details />} /> {/*Cuando se le da click al boton de detalles que dirige a esa ruta, se muestra la pagina de Details*/}
+          <Route path="/addGame" element={<AddGame />} />     
         </Routes>
       </BrowserRouter>
     </div>
